@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Event Landing Page</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: rgb(43, 199, 174);
+      --background: rgb(23, 20, 62);
+      --white: #fff;
+      --black: #000;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--white);
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+      box-sizing: border-box;
+      padding-top: 64px;
+      overflow-x: hidden;
+    }
+    html {
+      overflow-x: hidden;
+    }
+    .hero {
+      padding: 32px 0 48px 0;
+      padding-top: 5%;
+      padding-bottom: 5%;
+      background: var(--primary);
+      box-shadow: none;
+    }
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120vw;
+      height: 120vw;
+      background: rgba(255,255,255,0.07);
+      z-index: 0;
+      border-radius: 20%;
+      pointer-events: none;
+    }
+    .hero::before {
+      top: 40%;
+      background: rgba(255,255,255,0.07);
+      width: 80vw;
+      height: 80vw;
+      border-radius: 0 0 50% 50%;
+    }
+    .hero::after {
+      top: 60%;
+      background: rgba(255,255,255,0.04);
+      width: 100vw;
+      height: 100vw;
+      border-radius: 0 0 50% 50%;
+    }
+    .hero-content {
+      background: none !important;
+      box-shadow: none !important;
+      position: relative;
+      
+
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      white-space: normal;
+      word-break: break-word;
+      line-height: 1.1;
+      text-align: left;
+    }
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+      color: var(--black);
+      letter-spacing: 1px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      width: 100%;
+    }
+    .stat {
+      min-width: 80px;
+      margin: 0.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .stat-number {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--white);
+      text-align: center;
+    }
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-top: 0.2rem;
+      letter-spacing: 1px;
+      white-space: normal;
+      text-align: center;
+      line-height: 1.1;
+    }
+    .divider {
+      width: 2px;
+      height: 60px;
+      background: rgba(0,0,0,0.15);
+      margin: 0 1.5rem;
+      display: none;
+    }
+    .hero-description {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-top: 2rem;
+      line-height: 1.6;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media (min-width: 700px) {
+      .hero-title {
+        font-size: 3.5rem;
+      }
+      .hero-subtitle {
+        font-size: 2.5rem;
+      }
+      .hero-stats {
+        gap: 3.5rem;
+      }
+      .divider {
+        display: block;
+      }
+    }
+    @media (max-width: 900px) {
+      .hero-title {
+        font-size: 1.3rem;
+      }
+      .hero-stats {
+        gap: 0.5rem;
+        width: 100%;
+      }
+      .stat-number {
+        font-size: 1rem;
+      }
+      .stat-label {
+        font-size: 0.8rem;
+      }
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 1.1rem;
+      }
+      .hero-stats {
+        flex-wrap: nowrap;
+        gap: 0.3rem;
+        overflow-x: auto;
+        width: 100%;
+      }
+      .stat {
+        min-width: 60px;
+      }
+      .stat-number {
+        font-size: 0.9rem;
+      }
+      .stat-label {
+        font-size: 0.7rem;
+      }
+      .hero-subtitle {
+        font-size: 0.95rem;
+      }
+    }
+    .agenda-section {
+      background: transparent;
+      padding: 60px 10px 80px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .agenda-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .agenda-title {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .dev-day {
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin-left: 16px;
+      letter-spacing: 1px;
+    }
+    .agenda-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      padding: 0 32px;
+    }
+    .agenda-tab {
+      background: rgba(43, 199, 174, 0.08);
+      color: var(--white);
+      border: none;
+      outline: none;
+      border-radius: 8px;
+      padding: 10px 26px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s, box-shadow 0.2s;
+      font-family: 'Montserrat', Arial, sans-serif;
+      box-shadow: none;
+    }
+    .agenda-tab:hover {
+      background: rgba(43, 199, 174, 0.18);
+      color: var(--primary);
+      box-shadow: 0 2px 8px 0 rgba(43,199,174,0.10);
+    }
+    .agenda-tab.active {
+      background: var(--primary);
+      color: var(--white);
+      box-shadow: 0 2px 12px 0 rgba(43,199,174,0.18);
+    }
+    .agenda-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px 0 rgba(23,20,62,0.10);
+      padding: 32px 18px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    #agenda-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .agenda-row {
+      display: flex;
+      align-items: center;
+      background: rgba(43, 199, 174, 0.18); /* light primary */
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 1.1rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .agenda-time {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--background);
+      min-width: 90px;
+      margin-right: 18px;
+    }
+    .agenda-desc {
+      color: var(--background);
+      font-weight: 500;
+    }
+    .agenda-speaker {
+      font-weight: 700;
+      color: var(--primary);
+    }
+    @media (max-width: 600px) {
+      .agenda-title {
+        font-size: 1.3rem;
+      }
+      .agenda-card {
+        padding: 16px 4px;
+      }
+      .agenda-row {
+        font-size: 0.98rem;
+        padding: 8px 8px;
+      }
+      .agenda-time {
+        font-size: 1rem;
+        min-width: 70px;
+        margin-right: 10px;
+      }
+    }
+    .countdown-section {
+      background: #fcfbf9;
+      padding: 60px 0 60px 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 80px;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .countdown-number {
+      font-size: 5rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'Montserrat', Arial, sans-serif;
+      line-height: 1;
+    }
+    .countdown-label {
+      font-size: 1.5rem;
+      color: var(--background);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-top: 10px;
+    }
+    @media (max-width: 900px) {
+      .countdown-container {
+        gap: 40px;
+      }
+      .countdown-number {
+        font-size: 3.2rem;
+      }
+      .countdown-label {
+        font-size: 1.1rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .countdown-container {
+        gap: 18px;
+      }
+      .countdown-number {
+        font-size: 2.1rem;
+      }
+      .countdown-label {
+        font-size: 0.85rem;
+      }
+    }
+    .advisers-section {
+      background: var(--background);
+      padding-top: 7%;
+      padding-bottom: 7%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .advisers-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 7%;
+      padding-bottom: 7%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .advisers-title, .adviser-name, .adviser-role, .adviser-org {
+      color: #fff;
+    }
+    .advisers-desc {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .advisers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px 24px;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+    .adviser-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 340px;
+      background: #23204a;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px 0 rgba(23,20,62,0.07);
+      padding: 0 0 18px 0;
+      margin: 0 auto;
+      overflow: hidden;
+      width: 100%;
+    }
+    .adviser-img {
+      width: 100%;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 14px 14px 0 0;
+      overflow: hidden;
+      margin-bottom: 0;
+      position: relative;
+    }
+    .adviser-img img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto;
+      box-shadow: 0 4px 24px 0 rgba(23,20,62,0.13);
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .adviser-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+      text-align: center;
+      width: 100%;
+      word-break: break-word;
+    }
+    .adviser-role {
+      font-size: 1rem;
+      color: #bdbdbd;
+      margin-bottom: 2px;
+      text-align: center;
+      width: 100%;
+    }
+    .adviser-org {
+      font-size: 0.98rem;
+      color: var(--primary);
+      text-align: center;
+      width: 100%;
+      word-break: break-word;
+    }
+    .advisers-btn-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .advisers-btn {
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 38px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Montserrat', Arial, sans-serif;
+      box-shadow: 0 2px 8px 0 rgba(43,199,174,0.10);
+    }
+    .advisers-btn:hover {
+      background: var(--background);
+      color: #fff;
+    }
+    @media (max-width: 1000px) {
+      .advisers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 18px;
+      }
+    }
+    @media (max-width: 900px) {
+      .adviser-card {
+        flex-direction: column;
+        min-height: 180px;
+      }
+      .adviser-img {
+        height: 100px;
+      }
+      .adviser-img img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    @media (max-width: 600px) {
+      .adviser-card {
+        min-height: 140px;
+      }
+      .adviser-img {
+        height: 80px;
+      }
+      .adviser-img img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    .experience-section {
+      background: #fcfbf9;
+      padding: 70px 0 70px 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .experience-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .experience-title {
+      color: var(--background);
+      font-size: 2.3rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 38px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .experience-cards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 38px;
+    }
+    .experience-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 32px 0 rgba(23,20,62,0.07);
+      display: flex;
+      align-items: stretch;
+      padding: 0;
+      overflow: hidden;
+      min-height: 280px;
+    }
+    .experience-card.reverse {
+      flex-direction: row-reverse;
+    }
+    .experience-card-content {
+      flex: 1 1 60%;
+      padding: 48px 36px 48px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .experience-card-number {
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: 700;
+      background: #f3fcfa;
+      border-radius: 12px;
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .experience-card-heading {
+      font-size: 2.1rem;
+      font-weight: 900;
+      color: var(--background);
+      margin-bottom: 18px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .experience-card-text {
+      font-size: 1.15rem;
+      color: #3a3a4a;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .experience-card-img {
+      flex: 1 1 40%;
+      background: #eaf8f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      min-height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+    .experience-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 1000px) {
+      .experience-card-content {
+        padding: 32px 18px 32px 18px;
+      }
+      .experience-card-heading {
+        font-size: 1.3rem;
+      }
+    }
+    @media (max-width: 800px) {
+      .experience-card {
+        flex-direction: column !important;
+        min-height: 0;
+      }
+      .experience-card-img {
+        min-height: 120px;
+        min-width: 100px;
+        height: 120px;
+        width: 100%;
+        overflow: hidden;
+      }
+      .experience-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .sponsors-section {
+      background: #fff;
+      padding: 80px 0 80px 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .sponsors-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sponsors-intro {
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    .sponsors-title {
+      color: var(--background);
+      font-size: 3.2rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 24px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .sponsors-desc {
+      color: var(--background);
+      font-size: 1.25rem;
+      text-align: center;
+      max-width: 700px;
+      margin-bottom: 40px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .sponsors-logos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px 24px;
+      width: 100%;
+      margin-bottom: 40px;
+      justify-items: center;
+    }
+    .sponsor-logo-placeholder {
+      width: 120px;
+      height: 60px;
+      background: #f3fcfa;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px 0 rgba(43,199,174,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #b2b2b2;
+    }
+    .sponsors-btn-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .sponsors-btn {
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 38px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Montserrat', Arial, sans-serif;
+      box-shadow: 0 2px 8px 0 rgba(43,199,174,0.10);
+    }
+    .sponsors-btn:hover {
+      background: var(--background);
+      color: #fff;
+    }
+    @media (max-width: 900px) {
+      .sponsors-title {
+        font-size: 2rem;
+      }
+      .sponsors-logos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px 12px;
+      }
+      .sponsor-logo-placeholder {
+        width: 90px;
+        height: 44px;
+      }
+    }
+    @media (max-width: 600px) {
+      .sponsors-title {
+        font-size: 1.3rem;
+      }
+      .sponsors-desc {
+        font-size: 0.98rem;
+      }
+      .sponsors-logos {
+        grid-template-columns: 1fr;
+        gap: 12px 0;
+      }
+      .sponsor-logo-placeholder {
+        width: 70px;
+        height: 32px;
+      }
+    }
+    .social-proof-section {
+      background: linear-gradient(120deg, #f8fbfd 60%, #f3f0fa 100%);
+      padding: 80px 0 80px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .social-proof-container {
+      display: flex;
+      flex-direction: column;
+      max-width: 1100px;
+      width: 100%;
+      align-items: center;
+    }
+    .social-proof-content {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+      gap: 0;
+    }
+    .social-proof-img {
+      flex: 1 1 40%;
+      min-width: 220px;
+      min-height: 320px;
+      background: linear-gradient(135deg, var(--primary) 60%, #e0f7f4 100%);
+      border-radius: 32px 0 0 32px;
+      box-shadow: 0 4px 32px 0 rgba(23,20,62,0.07);
+    }
+    .social-proof-feedbacks {
+      flex: 1 1 60%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .social-proof-title {
+      color: var(--primary);
+      font-size: 2.3rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 48px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      width: 100%;
+    }
+    .social-proof-feedback {
+      background: #fff;
+      border-radius: 0 32px 32px 32px;
+      box-shadow: 0 2px 12px 0 rgba(43,199,174,0.07);
+      padding: 32px 28px;
+      margin-bottom: 0;
+      position: absolute;
+      width: 100%;
+      min-height: 320px;
+      max-height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      box-sizing: border-box;
+      overflow: auto;
+    }
+    .social-proof-feedback.active {
+      opacity: 1;
+      z-index: 1;
+    }
+    .social-proof-quote {
+      color: var(--background);
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 18px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      width: 100%;
+      word-break: break-word;
+    }
+    .social-proof-meta {
+      color: var(--background);
+      font-size: 1.05rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      width: 100%;
+      text-align: center;
+    }
+    .social-proof-org {
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 900px) {
+      .social-proof-content {
+        flex-direction: column;
+      }
+      .social-proof-img {
+        border-radius: 32px 32px 0 0;
+        min-width: 100%;
+        min-height: 180px;
+      }
+      .social-proof-feedbacks {
+        min-width: 100%;
+        position: static;
+      }
+      .social-proof-feedback {
+        border-radius: 0 0 32px 32px;
+        height: auto;
+        min-height: 120px;
+        position: static;
+        opacity: 1 !important;
+        display: block;
+        margin-bottom: 18px;
+      }
+      .social-proof-feedback:not(.active) {
+        display: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .social-proof-feedback {
+        height: 180px;
+        padding: 10px 4px;
+      }
+      .social-proof-quote {
+        font-size: 1rem;
+      }
+    }
+    .save-date-section {
+      background: linear-gradient(120deg, var(--primary) 60%, #2bc7ae 100%);
+      padding: 80px 0 80px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .save-date-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+    }
+    .save-date-title {
+      color: #fff;
+      font-size: 3.2rem;
+      font-weight: 900;
+      margin-bottom: 18px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      text-align: center;
+    }
+    .save-date-details {
+      color: var(--white);
+      font-size: 2rem;
+      font-weight: 500;
+      margin-bottom: 38px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      text-align: center;
+    }
+    .save-date-btn {
+      background: var(--white);
+      color: rgb(23, 20, 62);
+      font-size: 1.25rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 18px 48px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Montserrat', Arial, sans-serif;
+      box-shadow: 0 2px 8px 0 rgba(43,199,174,0.10);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .save-date-btn:hover {
+      background: var(--background);
+      color: var(--white);
+    }
+    .save-date-btn-icon {
+      font-size: 1.4em;
+    }
+    @media (max-width: 900px) {
+      .save-date-title {
+        font-size: 2rem;
+      }
+      .save-date-details {
+        font-size: 1.1rem;
+      }
+      .save-date-btn {
+        font-size: 1rem;
+        padding: 12px 24px;
+      }
+    }
+    @media (max-width: 600px) {
+      .save-date-title {
+        font-size: 1.2rem;
+      }
+      .save-date-details {
+        font-size: 0.9rem;
+      }
+      .save-date-btn {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+    }
+    .footer-section {
+      background: var(--background);
+      color: #fff;
+      padding: 60px 0 0 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .footer-cols {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .footer-col {
+      min-width: 180px;
+      flex: 1 1 180px;
+    }
+    .footer-col-title {
+      font-weight: 900;
+      font-size: 1.2rem;
+      margin-bottom: 18px;
+    }
+    .footer-link {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 14px;
+      font-size: 1.15rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .footer-link:hover {
+      color: #7c5cf6;
+    }
+    .footer-link-green {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .footer-col-social {
+      min-width: 260px;
+      flex: 2 1 260px;
+    }
+    .footer-social-icons {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .footer-social-icon img {
+      width: 32px;
+      height: 32px;
+      filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(120deg);
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .footer-social-icon img:hover {
+      opacity: 1;
+    }
+    .footer-support {
+      margin-bottom: 18px;
+      border-top: 2px dotted #7c5cf6;
+      border-bottom: 2px dotted #7c5cf6;
+      padding: 12px 0;
+    }
+    .footer-support-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .footer-support-text {
+      font-size: 1.1rem;
+    }
+    .footer-award {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .footer-award-img {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #fff;
+      object-fit: contain;
+    }
+    .footer-award-text {
+      font-size: 1.05rem;
+      color: #fff;
+    }
+    .footer-copyright {
+      text-align: left;
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 500;
+      padding: 24px 0 24px 0;
+    }
+    @media (max-width: 900px) {
+      .footer-cols {
+        flex-direction: column;
+        gap: 32px;
+      }
+      .footer-col-social {
+        min-width: 0;
+        flex: 1 1 100%;
+      }
+    }
+    .main-hero-section {
+      position: relative;
+      width: 100%;
+      min-height: calc(100vh - 64px);
+      background: linear-gradient(120deg, #3d2fae 60%, #2bc7ae 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 24px 0 48px 0;
+    }
+    .main-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.08) 0, rgba(61,47,174,0.12) 100%);
+      z-index: 1;
+    }
+    .main-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 12px;
+      padding-right: 0;
+    }
+    .main-hero-title {
+      font-size: 3.8rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      margin-bottom: 18px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #fff;
+      text-shadow: 0 4px 32px rgba(23,20,62,0.10);
+    }
+    .main-hero-subtitle {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--primary);
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .main-hero-desc {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 38px;
+      max-width: 700px;
+      line-height: 1.5;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .main-hero-btn {
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      padding: 18px 48px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: 'Montserrat', Arial, sans-serif;
+      box-shadow: 0 2px 8px 0 rgba(43,199,174,0.10);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .main-hero-btn:hover {
+      background: var(--background);
+      color: #fff;
+    }
+    @media (max-width: 900px) {
+      .main-hero-title {
+        font-size: 2.2rem;
+      }
+      .main-hero-subtitle {
+        font-size: 1.2rem;
+      }
+      .main-hero-desc {
+        font-size: 1rem;
+      }
+      .main-hero-section {
+        min-height: 340px;
+        padding: 24px 0 24px 0;
+      }
+      .main-hero-content {
+        padding-left: 8px;
+        padding-right: 0;
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+    @media (max-width: 600px) {
+      .main-hero-section {
+        padding: 12px 0 12px 0;
+      }
+      .main-hero-content {
+        padding-left: 4px;
+        padding-right: 0;
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+    /* SECTION PADDING FOR RESPONSIVENESS */
+    section, .agenda-section, .experience-section, .advisers-section, .sponsors-section, .social-proof-section, .save-date-section, .footer-section {
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+    @media (max-width: 900px) {
+      section, .agenda-section, .experience-section, .advisers-section, .sponsors-section, .social-proof-section, .save-date-section, .footer-section {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+    @media (max-width: 600px) {
+      section, .agenda-section, .experience-section, .advisers-section, .sponsors-section, .social-proof-section, .save-date-section, .footer-section {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--background);
+      box-shadow: 0 2px 12px 0 rgba(23,20,62,0.07);
+      z-index: 1000;
+      font-family: 'Montserrat', Arial, sans-serif;
+      height: 64px;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+    }
+    .navbar-logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: 1px;
+      user-select: none;
+    }
+    .navbar-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .navbar-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      transition: color 0.2s, border-bottom 0.2s;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .navbar-links a:hover {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+    }
+    .navbar-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      gap: 5px;
+    }
+    .navbar-hamburger span {
+      display: block;
+      width: 24px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 900px) {
+      .navbar-container {
+        padding: 0 16px;
+      }
+      .navbar-links {
+        gap: 18px;
+      }
+    }
+    @media (max-width: 700px) {
+      .navbar-links {
+        position: fixed;
+        top: 64px;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 220px;
+        padding: 18px 0 18px 18px;
+        box-shadow: 0 2px 12px 0 rgba(23,20,62,0.07);
+        transform: translateX(100%);
+        transition: transform 0.3s;
+        z-index: 1001;
+        gap: 18px;
+        height: calc(100vh - 64px);
+      }
+      .navbar-links.open {
+        transform: translateX(0);
+      }
+      .navbar-hamburger {
+        display: flex;
+      }
+    }
+    @media (max-width: 600px) {
+      .navbar-logo {
+        font-size: 1.1rem;
+      }
+      .navbar-links {
+        width: 160px;
+        padding-left: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">AI Spring School</div>
+      <div class="navbar-links" id="navbarLinks">
+        <a href="#agenda-section">Agenda</a>
+        <a href="#advisors-section">Speakers</a>
+        <a href="#experience-section">Experience</a>
+        <a href="#sponsors-section">Sponsors</a>
+      </div>
+      <div class="navbar-hamburger" id="navbarHamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <!-- Main Hero Section Start -->
+  <section class="main-hero-section">
+    <div class="main-hero-bg"></div>
+    <div class="main-hero-content">
+      <h1 class="main-hero-title">AI Spring School</h1>
+      <div class="main-hero-subtitle">Discover the forefront of AI Advancement and Innovation</div>
+      <div class="main-hero-desc">
+        Join 300+ of your peers in Rabat, Morocco, September 8-12, for 8+ sessions, keynotes, and panels with professionals and researchers at the epicenter of the Global AI community
+      </div>
+      <a href="#agenda-section" class="main-hero-btn">See the Agenda</a>
+    </div>
+  </section>
+  <!-- Main Hero Section End -->
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-title">EXPERIENCE THE FUTURE OF MULTIMODAL AI,</div>
+      <div class="hero-subtitle">WHERE FOUNDATION MODELS, VISION, AND LANGUAGE COME TO LIFE</div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">5</div>
+          <div class="stat-label">DAYS</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <div class="stat-number">12+</div>
+          <div class="stat-label">LECTURES</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <div class="stat-number">6</div>
+          <div class="stat-label">HANDS-ON LABS</div>
+        </div>
+        <div class="divider"></div>
+        <div class="stat">
+          <div class="stat-number">7</div>
+          <div class="stat-label">COUNTRIES REPRESENTED</div>
+        </div>
+      </div>
+      <div class="hero-description">
+        Join top AI researchers, PhD students, and innovators at the Multimodal AI Spring School 2025 in Rabat to explore the next frontier of artificial intelligence. Learn how foundation models are reshaping computer vision, language, and generative systems. Engage with world-renowned experts, dive into real-world labs, and take part in critical conversations shaping the future of multimodal AI research.
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda Section Start -->
+  <section class="agenda-section" id="agenda-section">
+    <div class="agenda-container">
+      <h2 class="agenda-title">AGENDA AT A GLANCE</span></h2>
+      <div class="agenda-tabs"></div>
+      <div class="agenda-card">
+        <div id="agenda-list"></div>
+      </div>
+    </div>
+  </section>
+  <!-- Agenda Section End -->
+
+  <!-- Countdown Timer Section Start -->
+  <section class="countdown-section">
+    <div class="countdown-container">
+      <div class="countdown-item">
+        <span class="countdown-number" id="days">00</span>
+        <span class="countdown-label">DAYS</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="hours">00</span>
+        <span class="countdown-label">HOURS</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="minutes">00</span>
+        <span class="countdown-label">MINUTES</span>
+      </div>
+      <div class="countdown-item">
+        <span class="countdown-number" id="seconds">00</span>
+        <span class="countdown-label">SECONDS</span>
+      </div>
+    </div>
+  </section>
+  <!-- Countdown Timer Section End -->
+
+  <!-- Meet The Expert Advisers Section Start -->
+  <section class="advisors-section" id="advisors-section">
+    <div class="advisers-container">
+      <h2 class="agenda-title">Meet The Expert Advisers Driving The Event's Agenda</h2>
+      <p class="advisers-desc">
+        At the heart of The AI School Spring lies our distinguished Ambassador Chapter. This esteemed group - featuring some of the brightest minds from the University Trento, central Florida, IMT Nord Europe, INPT, and beyond - are not just advisors; they are the architects of the Summit's cutting-edge event agenda, ensuring that every moment you spend with us is an investment in your future.
+      </p>
+      <div class="advisers-grid">
+        <!-- 8 Speaker Placeholders -->
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;"></div>
+          <div class="adviser-name">Full Name</div>
+          <div class="adviser-role">Occupation</div>
+          <div class="adviser-org">Organization</div>
+        </div>
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;"></div>
+          <div class="adviser-name">Full Name</div>
+          <div class="adviser-role">Occupation</div>
+          <div class="adviser-org">Organization</div>
+        </div>
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;"></div>
+          <div class="adviser-name">Full Name</div>
+          <div class="adviser-role">Occupation</div>
+          <div class="adviser-org">Organization</div>
+        </div>
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;"></div>
+          <div class="adviser-name">Full Name</div>
+          <div class="adviser-role">Occupation</div>
+          <div class="adviser-org">Organization</div>
+        </div>
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;"></div>
+          <div class="adviser-name">Full Name</div>
+          <div class="adviser-role">Occupation</div>
+          <div class="adviser-org">Organization</div>
+        </div>
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;"></div>
+          <div class="adviser-name">Full Name</div>
+          <div class="adviser-role">Occupation</div>
+          <div class="adviser-org">Organization</div>
+        </div>
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;"></div>
+          <div class="adviser-name">Full Name</div>
+          <div class="adviser-role">Occupation</div>
+          <div class="adviser-org">Organization</div>
+        </div>
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;"></div>
+          <div class="adviser-name">Full Name</div>
+          <div class="adviser-role">Occupation</div>
+          <div class="adviser-org">Organization</div>
+        </div>
+      </div>
+      <div class="advisers-btn-container">
+        <button class="advisers-btn">Become a Speaker</button>
+      </div>
+    </div>
+  </section>
+  <!-- Meet The Expert Advisers Section End -->
+
+  <!-- What You Will Experience Section Start -->
+  <section class="experience-section" id="experience-section">
+    <div class="experience-container">
+      <h2 class="experience-title">What you will experience on site:</h2>
+      <div class="experience-cards">
+        <!-- Card 1: Speakers -->
+        <div class="experience-card">
+          <div class="experience-card-content">
+            <div class="experience-card-number">01</div>
+            <div class="experience-card-heading">Stellar Conference Speakers:</div>
+            <div class="experience-card-text">
+              Our speaker line-up is absolutely unmatched, including the Heads of Policy & Public Engagement, Vice Presidents, Chief Privacy & Data Responsibility Officers, Directors for Technology and Research Investments and more!
+            </div>
+          </div>
+          <div class="experience-card-img"></div>
+        </div>
+        <!-- Card 2: Labs -->
+        <div class="experience-card reverse">
+          <div class="experience-card-content">
+            <div class="experience-card-number">02</div>
+            <div class="experience-card-heading">Labs:</div>
+            <div class="experience-card-text">
+              Practical sessions to equip with the knowledge you need to upgrade your self and your projects. From Deep learning techniques to secure AI usage, You are guaranteed to find what you need.
+            </div>
+          </div>
+          <div class="experience-card-img"></div>
+        </div>
+        <!-- Card 3: Panels -->
+        <div class="experience-card">
+          <div class="experience-card-content">
+            <div class="experience-card-number">03</div>
+            <div class="experience-card-heading">Panels:</div>
+            <div class="experience-card-text">
+              Great Caliber discussion between leaders, researchers, and decision makers discussing …
+            </div>
+          </div>
+          <div class="experience-card-img"></div>
+        </div>
+        <!-- Card 4: Case Studies -->
+        <div class="experience-card reverse">
+          <div class="experience-card-content">
+            <div class="experience-card-number">04</div>
+            <div class="experience-card-heading">Case Studies:</div>
+            <div class="experience-card-text">
+              See showcasing their latest AI solutions and products. Discover the tools and innovations that can propel your business forward.
+            </div>
+          </div>
+          <div class="experience-card-img"></div>
+        </div>
+        <!-- Card 5: Networking -->
+        <div class="experience-card">
+          <div class="experience-card-content">
+            <div class="experience-card-number">05</div>
+            <div class="experience-card-heading">Networking:</div>
+            <div class="experience-card-text">
+              Connect with 4,500+ attendees. There's plenty of opportunities to meet and mingle with your peers at The Networking Cafés and breaks.
+            </div>
+          </div>
+          <div class="experience-card-img"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- What You Will Experience Section End -->
+
+  <!-- Sponsors Section Start -->
+  <section class="sponsors-section" id="sponsors-section">
+    <div class="sponsors-container">
+      <div class="sponsors-intro">introducing our</div>
+      <h2 class="sponsors-title">2025 Sponsors</h2>
+      <p class="sponsors-desc">
+As a sponsor, you'll gain exclusive access to engage with leading AI researchers and thought leaders, aligning your brand with their expertise and reputation. It's a unique opportunity to elevate your visibility, strengthen your network, and advance your thought leadership goals. Explore a snapshot of this year's sponsors below.
+      </p>
+      <div class="sponsors-logos">
+        <div class="sponsor-logo-placeholder"></div>
+        <div class="sponsor-logo-placeholder"></div>
+        <div class="sponsor-logo-placeholder"></div>
+        <div class="sponsor-logo-placeholder"></div>
+        <div class="sponsor-logo-placeholder"></div>
+        <div class="sponsor-logo-placeholder"></div>
+        <div class="sponsor-logo-placeholder"></div>
+        <div class="sponsor-logo-placeholder"></div>
+      </div>
+      <div class="sponsors-btn-container">
+        <button class="sponsors-btn">Become a sponsor</button>
+      </div>
+    </div>
+  </section>
+  <!-- Sponsors Section End -->
+
+  <!-- Social Proof Section Start -->
+  <section class="social-proof-section">
+    <div class="social-proof-container">
+      <h2 class="social-proof-title">Hear What Our Attendees Have To Say:</h2>
+      <div class="social-proof-content">
+        <div class="social-proof-img"></div>
+        <div class="social-proof-feedbacks">
+          <div class="social-proof-feedback">
+            <div class="social-proof-quote">"I had a fantastic time at the conference. I had a genuinely great time and met a lot of interesting people."</div>
+            <div class="social-proof-meta">
+              GLOBAL HEAD OF QUALITY MANAGEMENT & PRODUCT GOVERNANCE<br>
+              <span class="social-proof-org">CREDIT SUISSE</span>
+            </div>
+          </div>
+          <div class="social-proof-feedback">
+            <div class="social-proof-quote">"The event was a great opportunity to network and learn from industry leaders."</div>
+            <div class="social-proof-meta">
+              DIRECTOR OF AI RESEARCH<br>
+              <span class="social-proof-org">NYU</span>
+            </div>
+          </div>
+          <div class="social-proof-feedback">
+            <div class="social-proof-quote">"Incredible speakers and hands-on labs. I left inspired and ready to innovate."</div>
+            <div class="social-proof-meta">
+              VP OF TECHNOLOGY<br>
+              <span class="social-proof-org">INPT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Social Proof Section End -->
+
+  <!-- Save the Date Section Start -->
+  <section class="save-date-section">
+    <div class="save-date-container">
+      <div class="save-date-title">Save the Date!</div>
+      <div class="save-date-details">
+        <div>September 08 - 12, 2025</div>
+        <div>Institut National des Postes et Télécommunications</div>
+        <div>Rabat</div>
+      </div>
+      <a class="save-date-btn" id="saveDateBtn" target="_blank"><span class="save-date-btn-icon">📅</span> ADD TO CALENDAR</a>
+    </div>
+  </section>
+  <!-- Save the Date Section End -->
+
+  <!-- Footer Start -->
+  <footer class="footer-section">
+    <div class="footer-container">
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">Get Involved</div>
+          <a href="contact.html?inquiry_type=sponsor" class="footer-link">BECOME A SPONSOR</a>
+          <a href="contact.html?inquiry_type=speaker" class="footer-link">BECOME A SPEAKER</a>
+          <a href="contact.html?inquiry_type=media_pass" class="footer-link">APPLY FOR A MEDIA PASS</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">AI Spring School</div>
+          <a href="#agenda-section" class="footer-link">Agenda</a>
+          <a href="#advisors-section" class="footer-link">Speakers</a>
+          <a href="#sponsors-section" class="footer-link">Sponsors</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Support</div>
+          <a href="contact.html" class="footer-link">Contact Us</a>
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms & Conditions</a>
+          <a href="#" class="footer-link">Code of Conduct</a>
+        </div>
+        <div class="footer-col footer-col-social">
+          <div class="footer-social-icons">
+            <a href="#" class="footer-social-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
+            <a href="#" class="footer-social-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube"></a>
+            <a href="#" class="footer-social-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg" alt="X"></a>
+            <a href="#" class="footer-social-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn"></a>
+            <a href="#" class="footer-social-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+          </div>
+ 
+        </div>
+      </div>
+      <div class="footer-copyright">
+        Copyright© 2025 Institut National des Postes et Télécommunications. All Rights Reserved
+      </div>
+    </div>
+  </footer>
+  <!-- Footer End -->
+
+  <!-- All scripts moved to the end of the body for proper DOM loading -->
+  <script>
+  // New agenda data from JSON
+  const agendaData = {
+    "Monday, 08 September": [
+      { "time": "08:30", "session": "Welcome" },
+      { "time": "09:00", "session": "MFM & Generative AI landscape: fast-moving issues, perspectives and paradigms for unlocking the potential", "speaker": "Jamal Benhamou" },
+      { "time": "10:30", "session": "Coffee break" },
+      { "time": "11:00", "session": "Learning compatible representations and large pre-trained models updating", "speaker": "Alberto Del Bimbo" },
+      { "time": "12:30", "session": "Lunch" },
+      { "time": "14:00", "session": "Diffusion Models in Computer Vision", "speaker": "Mubarak Shah" },
+      { "time": "15:30", "session": "Coffee break" },
+      { "time": "16:00", "session": "Cross-modal understanding and generation of multimodal content", "speaker": "Nicu Sebe" }
+    ],
+    "Tuesday, 09 September": [
+      { "time": "09:00", "session": "Generating and Detecting of Deepfakes", "speaker": "Antitza Dantcheva" },
+      { "time": "10:30", "session": "Coffee break" },
+      { "time": "11:00", "session": "3D Human Motion Diffusion Model", "speaker": "Mohamed Daoudi" },
+      { "time": "12:30", "session": "Lunch" },
+      { "time": "14:00", "session": "Geometric Learning: Foundations and Applications", "speaker": "Stefano Berretti" },
+      { "time": "15:30", "session": "Coffee break" },
+      { "time": "16:00", "session": "Moroccan Case Study: Synergeon", "speakers": ["Karim Amor", "Abdeslam Jakjoud"] },
+      { "time": "16:30", "session": "Panel: Computer Vision in the Age of Large Language Models", "panelists": ["S. Berretti", "A. Dantcheva", "M. Daoudi", "A. Del Bimbo", "N. Sebe", "M. Shah", "K. Amor", "A. Jakjoud", "J. Benhamou"] }
+    ],
+    "Wednesday, 10 September": [
+      { "time": "09:00 - 17:30", "session": "Private Visit" }
+    ],
+    "Thursday, 11 September": [
+      { "time": "09:00", "session": "Lab"},
+      { "time": "10:30", "session": "Coffee break" },
+      { "time": "11:00", "session": "Lab", "instructors": ["Naima Otberdout", "Baptiste Chopin"] },
+      { "time": "12:30", "session": "Lunch" },
+      { "time": "14:00", "session": "Lab", "instructors": ["Naima Otberdout", "Baptiste Chopin"] },
+      { "time": "15:30", "session": "Coffee break" },
+      { "time": "16:00", "session": "Lab", "instructors": ["Naima Otberdout", "Baptiste Chopin"] }
+    ],
+    "Friday, 12 September": [
+      { "time": "09:00", "session": "Lab", "instructors": ["Naima Otberdout", "Baptiste Chopin"] },
+      { "time": "10:30", "session": "Coffee break" },
+      { "time": "11:00", "session": "Lab", "instructor": "Omar Souissi" },
+      { "time": "12:30", "session": "Lunch" },
+      { "time": "14:00 - 17:30", "session": "Rabat City Tour" }
+    ]
+  };
+
+  const agendaDays = Object.keys(agendaData);
+
+  function renderAgenda(dayIdx) {
+    const agendaList = document.getElementById('agenda-list');
+    const day = agendaDays[dayIdx];
+    agendaList.innerHTML = agendaData[day].map(item => {
+      return `<div class="agenda-row"><span class="agenda-time">${item.time}</span><span class='agenda-desc'>${item.session}</span></div>`;
+    }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Dynamically generate agenda tabs
+    const tabsContainer = document.querySelector('.agenda-tabs');
+    if (tabsContainer) {
+      tabsContainer.innerHTML = '';
+      agendaDays.forEach((day, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'agenda-tab' + (idx === 0 ? ' active' : '');
+        btn.setAttribute('data-day', idx);
+        btn.textContent = day;
+        btn.addEventListener('click', function() {
+          console.log('Tab clicked:', day, idx);
+          // Remove active from all
+          tabsContainer.querySelectorAll('.agenda-tab').forEach(t => t.classList.remove('active'));
+          btn.classList.add('active');
+          renderAgenda(idx);
+        });
+        tabsContainer.appendChild(btn);
+      });
+      console.log('Agenda tabs generated:', tabsContainer.innerHTML);
+    }
+    renderAgenda(0); // Initial render
+  });
+
+  // Update speakers/advisers section
+  const speakersData = [
+    {"name": "Mubarak Shah", "occupation": "Full Professor", "organization_and_country": "University of Central Florida, USA"},
+    {"name": "Nicu Sebe", "occupation": "Full Professor", "organization_and_country": "University of Trento, Italy"},
+    {"name": "Alberto Del Bimbo", "occupation": "Full Professor", "organization_and_country": "University of Florence, Italy"},
+    {"name": "Stefano Berretti", "occupation": "Associate Professor", "organization_and_country": "University of Florence, Italy"},
+    {"name": "Antitza Dantcheva", "occupation": "Researcher", "organization_and_country": "INRIA, France"},
+    {"name": "Mohamed Daoudi", "occupation": "Full Professor", "organization_and_country": "IMT Nord Europe, France"},
+    {"name": "Naima Otberdout", "occupation": "Research and Education Fellow", "organization_and_country": "AI Movement, Mohammed VI Polytechnic University (UM6P), Morocco"},
+    {"name": "Baptiste Chopin", "occupation": "Post-doctoral researcher", "organization_and_country": "INRIA, France"},
+    {"name": "Omar Souissi", "occupation": "Professor (Habilité)", "organization_and_country": "INPT, Morocco"},
+    {"name": "Jamal Benhamou", "occupation": "Director", "organization_and_country": "Soft Centre, Morocco"}
+  ];
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const advisersGrid = document.querySelector('.advisers-grid');
+    if (advisersGrid) {
+      function getSpeakerImage(name) {
+        const map = {
+          'Mubarak Shah': 'mubarak_shah.jpg',
+          'Nicu Sebe': 'nicu_sebe.png',
+          'Alberto Del Bimbo': 'del_bimbo.jpeg',
+          'Stefano Berretti': 'stefano.png',
+          'Antitza Dantcheva': 'antitza.jpg',
+          'Mohamed Daoudi': 'mohamed_daoudi.png',
+          'Naima Otberdout': 'naima.JPG',
+          'Baptiste Chopin': 'chopin.jpg',
+          'Omar Souissi': 'OmarSOUISSI.jpg',
+          'Jamal Benhamou': 'PHOTO-benhamou.jpg'
+        };
+        return map[name] ? `assets/speakers/${map[name]}` : '';
+      }
+      advisersGrid.innerHTML = speakersData.map(speaker => `
+        <div class="adviser-card">
+          <div class="adviser-img" style="background: none;">
+            <img src="${getSpeakerImage(speaker.name)}" alt="${speaker.name}" style="background: #fff;" />
+          </div>
+          <div class="adviser-name">${speaker.name}</div>
+          <div class="adviser-role">${speaker.occupation}</div>
+          <div class="adviser-org">${speaker.organization_and_country}</div>
+        </div>
+      `).join('');
+    }
+    // Sponsors section
+    const sponsorsLogos = [
+      { name: 'soft_centre', file: 'soft_centre.jpg' },
+      { name: 'IMT Nord Europe', file: 'Logo_IMT_Nord_Europe.png' },
+      { name: 'ANRT', file: 'Logo_ANRT.jpg' },
+      { name: 'INPT', file: 'Logo_inpt.png' }
+    ];
+    const sponsorsGrid = document.querySelector('.sponsors-logos');
+    if (sponsorsGrid) {
+      sponsorsGrid.innerHTML = sponsorsLogos.map(logo => `
+        <div class="sponsor-logo-placeholder" style="background: #fff; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/sponsors/${logo.file}" alt="${logo.name}" style="max-width: 100%; max-height: 100%; object-fit: contain; background: #fff;" />
+        </div>
+      `).join('');
+    }
+    // Social proof section
+    const socialProofImg = document.querySelector('.social-proof-img');
+    if (socialProofImg) {
+      socialProofImg.innerHTML = '<img src="assets/social_proof/social_proof.jpg" alt="Social Proof" style="width: 100%; height: 100%; object-fit: cover; border-radius: 32px 0 0 32px;" />';
+    }
+    // Experience section
+    const experienceImages = [
+      'speakers.jpg',
+      'labs.jpg',
+      'panels.jpg',
+      'case studies.jpg',
+      'networking.jpg'
+    ];
+    const experienceCards = document.querySelectorAll('.experience-card, .experience-card.reverse');
+    experienceCards.forEach((card, idx) => {
+      const imgDiv = card.querySelector('.experience-card-img');
+      if (imgDiv && experienceImages[idx]) {
+        imgDiv.innerHTML = `<img src="assets/experience/${experienceImages[idx]}" alt="Experience" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px;" />`;
+      }
+    });
+  });
+
+  // === COUNTDOWN TIMER ===
+  // Set your target date/time here (YYYY-MM-DDTHH:MM:SS format)
+  const countdownTarget = new Date('2025-09-08T09:00:00'); // <-- CHANGE THIS DATE/TIME AS NEEDED
+
+  function updateCountdown() {
+    const now = new Date();
+    let diff = countdownTarget - now;
+    if (diff < 0) diff = 0;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
+
+  // Social Proof Feedback Rotation
+  document.addEventListener('DOMContentLoaded', function() {
+    const feedbacks = document.querySelectorAll('.social-proof-feedback');
+    let currentIndex = 0;
+
+    // Show first feedback initially
+    feedbacks[0].classList.add('active');
+
+    function rotateFeedback() {
+      feedbacks[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % feedbacks.length;
+      feedbacks[currentIndex].classList.add('active');
+    }
+
+    // Rotate feedbacks every 4 seconds
+    setInterval(rotateFeedback, 4000);
+  });
+
+  // Navbar hamburger menu logic
+  document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('navbarHamburger');
+    const links = document.getElementById('navbarLinks');
+    if (hamburger && links) {
+      hamburger.addEventListener('click', function() {
+        links.classList.toggle('open');
+      });
+      // Optional: close menu when clicking a link (for single-page UX)
+      links.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          links.classList.remove('open');
+        });
+      });
+    }
+  });
+
+  // Save the Date: Google Calendar integration
+  document.addEventListener('DOMContentLoaded', function() {
+    var saveDateBtn = document.getElementById('saveDateBtn');
+    if (saveDateBtn) {
+      // Google Calendar event for April 29, 2024
+      const start = '20250908';
+      const end = '20250912';
+      const text = encodeURIComponent('International Spring School - Multimodal Foundation Models and Generative AI 2024');
+      const details = encodeURIComponent('Institut National des Postes et Télécommunications, Rabat');
+      const location = encodeURIComponent('Institut National des Postes et Télécommunications, Rabat, Morocco');
+      const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}&location=${location}`;
+      saveDateBtn.setAttribute('href', url);
+    }
+  });
+
+  // Enable smooth scrolling for anchor links
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href').slice(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY - 64,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+  </script>
+</body>
+</html>
